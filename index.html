@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070b14">
+<title>Quem Sou Eu?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="net" class="net" role="status" hidden>Conexão perdida. Reconectando…</div>
+<main>
+  <header><h1>Quem sou eu?</h1></header>
+
+  <section id="home" class="screen">
+    <p class="sub">Descubra quem você é usando só perguntas. De 2 a 16 jogadores.</p>
+    <button class="btn big" data-go="onMenu">🌐 Modo Online</button>
+    <button class="btn big alt" data-go="lSetup">📱 Modo Local</button>
+    <details class="card"><summary>Como jogar</summary>
+      <p>Cada jogador recebe um personagem que só os outros veem. Faça perguntas de sim ou não para descobrir quem você é.</p>
+      <p><b>Online:</b> cada resposta é votada por todos. Se a maioria diz “Sim”, você pergunta de novo; senão, passa a vez. Quando achar que sabe, toque em “Tentar adivinhar”.</p>
+      <p><b>Local:</b> um aparelho passa de mão em mão. Os outros veem o personagem e respondem em voz alta.</p>
+      <p>Vence quem descobre com menos perguntas.</p>
+    </details>
+  </section>
+
+  <!-- ONLINE -->
+  <section id="onMenu" class="screen" hidden>
+    <h2>Modo Online</h2>
+    <label>Seu nome<input id="nome" maxlength="14" autocomplete="nickname"></label>
+    <button class="btn" id="criar">Criar sala</button>
+    <div class="or">ou entre em uma sala existente</div>
+    <label>Código da sala<input id="codigo" maxlength="5" autocapitalize="characters" autocomplete="off"></label>
+    <button class="btn alt" id="entrar">Entrar na sala</button>
+    <p id="msg" class="msg" role="status"></p>
+    <button class="link" data-go="home">← Voltar</button>
+  </section>
+
+  <section id="lobby" class="screen" hidden>
+    <h2>Sala <span id="cod" class="code"></span></h2>
+    <button class="btn small" id="copiar">Copiar link de convite</button>
+    <p id="cnt"></p>
+    <p class="sub">Funciona entre celular, tablet e computador. Quem cria a sala deve usar o aparelho mais estável.</p>
+    <ul id="lista" class="pls"></ul>
+    <div id="cfg" class="card">
+      <label>Categoria dos personagens<select id="cat"></select></label>
+      <button class="btn" id="iniciar">Iniciar jogo</button>
+    </div>
+    <p id="espera" class="sub">Aguardando o anfitrião iniciar o jogo…</p>
+    <button class="link" id="sair1">Sair da sala</button>
+  </section>
+
+  <section id="game" class="screen" hidden>
+    <div class="bar"><span>Sala <b id="cod2" class="code"></b></span><button class="link" id="sair2">Sair</button></div>
+    <ul id="jog" class="pls"></ul>
+    <div id="acao" class="card"></div>
+    <p id="ult" class="last"></p>
+    <details class="card"><summary>Histórico</summary><ol id="hist"></ol></details>
+  </section>
+
+  <section id="end" class="screen" hidden>
+    <h2>🏆 Fim de jogo</h2>
+    <ol id="rank" class="rank"></ol>
+    <button class="btn" id="again">Jogar de novo</button>
+    <p id="espera2" class="sub">Aguardando o anfitrião…</p>
+    <button class="link" id="sair3">Sair da sala</button>
+  </section>
+
+  <!-- LOCAL -->
+  <section id="lSetup" class="screen" hidden>
+    <h2>Modo Local</h2>
+    <p class="sub">Um aparelho para todos. Adicione de 2 a 16 jogadores.</p>
+    <div id="lNomes" class="col"></div>
+    <button class="btn small" id="lAdd">+ Adicionar jogador</button>
+    <label>Categoria<select id="lCat"></select></label>
+    <label>Tempo por rodada
+      <select id="lTempo"><option value="0">Sem limite</option><option value="60">60 segundos</option><option value="120" selected>120 segundos</option><option value="180">180 segundos</option></select>
+    </label>
+    <button class="btn" id="lStart">Começar</button>
+    <button class="link" data-go="home">← Voltar</button>
+  </section>
+
+  <section id="lTurn" class="screen" hidden>
+    <p id="lMsg" class="last"></p>
+    <h2 id="lVez"></h2>
+    <p class="sub">Os outros jogadores veem o personagem. Quem joga não pode olhar!</p>
+    <div id="lCard" class="big-note"></div>
+    <button class="btn small" id="lToggle">Mostrar personagem</button>
+    <p class="sub">Perguntas: <b id="lQ">0</b> <span id="lT"></span></p>
+    <button class="btn alt" id="lPlus">+1 pergunta feita</button>
+    <div class="row"><button class="btn" id="lOk">🎉 Acertei!</button><button class="btn danger" id="lSkip">Desistir</button></div>
+  </section>
+
+  <section id="lEnd" class="screen" hidden>
+    <h2>🏆 Resultado</h2>
+    <p id="lFinal" class="last"></p>
+    <ol id="lRank" class="rank"></ol>
+    <button class="btn" data-go="lSetup">Jogar de novo</button>
+    <button class="link" data-go="home">Voltar ao início</button>
+  </section>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
